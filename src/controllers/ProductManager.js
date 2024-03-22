@@ -1,21 +1,10 @@
 import fs from 'fs/promises'
+import Product from '../models/Product.js'
 
-export class Product {
-    static id = 0
-    constructor(title, description, price, thumbnail, code, stock) {
-        this.title = title
-        this.description = description
-        this.price = price
-        this.thumbnail = thumbnail
-        this.code = code
-        this.stock = stock
-        this.id = id++
-    }
-}
 
 export default class ProductManager {
-    constructor(PATH) {
-        this.path = PATH
+    constructor() {
+        this.path = path.join(__dirname, '..', 'data', 'products.JSON')
     }
     // METODOS
     async addId(){
