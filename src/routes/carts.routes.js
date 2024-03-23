@@ -1,10 +1,10 @@
 import express from 'express'
-import CartManager from "./controllers/CartManager.js"
+import CartManager from "../controllers/CartManager.js"
 import ProductManager from '../controllers/ProductManager.js'
 
+const routerCarts = express.Router()
 const productManager = new ProductManager()
 const cartManager = new CartManager()
-const routerCarts = express.Router()
 
 routerCarts.post("/", async (req, res) => {
     try {

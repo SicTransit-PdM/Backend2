@@ -1,5 +1,7 @@
 import fs from 'fs/promises'
 import Product from '../models/Product.js'
+import * as path from 'path'
+import { __dirname } from '../../path.js'
 
 
 export default class ProductManager {

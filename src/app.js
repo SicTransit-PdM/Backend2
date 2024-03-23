@@ -6,19 +6,19 @@ const app = express()
 const PORT = 8080
 const router = express.Router()
 
-
+// MIDDLEWARES
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
-
-app.listen(PORT, () => {
-    console.log("Server Online")
-})
 
 app.get("/", (req, res) => 
     res.send("Welcome")
 )
 
-
+// RUTAS
 router.use('/api/carts', routerCarts)
 router.use('/api/products', routerProducts)
+
+
+app.listen(PORT, () => {
+    console.log("Server Online")
+})
