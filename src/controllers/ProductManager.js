@@ -5,8 +5,9 @@ import { __dirname } from '../../path.js'
 
 
 export default class ProductManager {
-    constructor() {
-        this.path = path.join(__dirname, '..', 'data', 'products.JSON')
+    constructor(PATH) {
+        //this.path = path.join(__dirname, '..', 'data', 'products.JSON')
+        this.path = PATH
     }
     // METODOS
     async addId(){

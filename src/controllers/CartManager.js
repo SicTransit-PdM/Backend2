@@ -4,8 +4,9 @@ import * as path from 'path'
 import { __dirname } from '../../path.js'
 
 class CartManager {
-    constructor(){
-        this.path = path.join(__dirname, '..', 'data', 'carts.JSON')
+    constructor(PATH){
+        //this.path = path.join(__dirname, '..', 'data', 'carts.JSON')
+        this.path = PATH
     }
     // METODOS
     async addId(){

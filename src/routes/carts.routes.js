@@ -3,8 +3,8 @@ import CartManager from "../controllers/CartManager.js"
 import ProductManager from '../controllers/ProductManager.js'
 
 const routerCarts = express.Router()
-const productManager = new ProductManager()
-const cartManager = new CartManager()
+const productManager = new ProductManager('./src/data/products.JSON')
+const cartManager = new CartManager('./src/data/carts.JSON')
 
 routerCarts.post("/", async (req, res) => {
     try {

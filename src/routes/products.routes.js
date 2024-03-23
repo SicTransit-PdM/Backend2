@@ -2,14 +2,14 @@ import express from 'express'
 import ProductManager from "../controllers/ProductManager.js"
 
 const routerProducts = express.Router()
-const productManager = new ProductManager()
+const productManager = new ProductManager('./src/data/products.JSON')
 
 routerProducts.get('/', async (req, res) => {
     try {
         let limit = parseInt(req.query.limit)
         const products = await productManager.getProducts();
-        let result = products.slice(0, limit)
-        res.status(200).json(result);
+        let result = limit ? products.slice(0, limit) : products
+        res.json(result);
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });
