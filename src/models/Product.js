@@ -1,16 +1,15 @@
 class Product {
-    static id = 0
-    constructor(title, description, code, price, status = true, stock, category, thumbnails = []) {
+    constructor(title, description, price, category, code, stock, status = true, thumbnails = []) {
         this.title = title
         this.description = description
-        this.code = code
         this.price = price
-        this.status = status
-        this.stock = stock
         this.category = category
+        this.code = code
+        this.stock = stock
+        this.status = status
         this.thumbnails = thumbnails
-        this.id = id++
     }
 }
+
 
 export default Product

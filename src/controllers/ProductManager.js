@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import Product from '../models/Product.js'
 import * as path from 'path'
-import { __dirname } from '../../path.js'
+import { __dirname } from '../path.js'
 
 
 export default class ProductManager {
@@ -29,35 +29,35 @@ export default class ProductManager {
         }
         return result
     }
-    async addProduct({title, description, price, category, code, stock, status, thumbnails}){
-        console.log('--------------------------')
-        console.log(`ADDING "${title}"...`)
-        const data = await this.getProducts()
-        // Comprobación del código del producto
-        let invalidCode = data.some(p => p.code == code)
-        console.log(`CHECKING: "${title}" code is valid? =>`, !invalidCode)
-        if(invalidCode){
-            console.error(`ERROR: A product with "${title}" code already exists.`)
-            return 'Ya existe un producto con ese código'
-        } else {
-            // Comprobación de los campos del producto
-            let args = [title, description, price, category, code, stock]
-            let invalidArgs = args.includes(undefined) || args.includes('') 
-            console.log(`CHECKING: "${title}" has valid fields? =>`, !invalidArgs)
-            if(invalidArgs){
-                console.error('ERROR: All fields are required.')
-                return 'Todos los campos son requeridos'
+        async addProduct({title, description, price, category, code, stock, status = true, thumbnails = []}){
+            console.log('--------------------------')
+            console.log(`ADDING "${title}"...`)
+            const data = await this.getProducts()
+            // Comprobación del código del producto
+            let invalidCode = data.some(p => p.code == code)
+            console.log(`CHECKING: "${title}" code is valid? =>`, !invalidCode)
+            if(invalidCode){
+                console.error(`ERROR: A product with "${title}" code already exists.`)
+                return 'Ya existe un producto con ese código'
             } else {
-                // Adición del producto a la lista
-                const newProduct = new Product(title, description, price, category, code, stock, status, thumbnails)
-                newProduct.id = await this.addId()
-                data.push(newProduct)
-                console.log(`ADDED: "${title}" was added successfully.`)
-                await fs.writeFile(this.path, JSON.stringify(data, null, '\t'))
-                return 'Producto agregado'
+                // Comprobación de los campos del producto
+                let args = [title, description, price, category, code, stock]
+                let invalidArgs = args.includes(undefined) || args.includes('') 
+                console.log(`CHECKING: "${title}" has valid fields? =>`, !invalidArgs)
+                if(invalidArgs){
+                    console.error('ERROR: All fields are required.')
+                    return 'Todos los campos son requeridos'
+                } else {
+                    // Adición del producto a la lista
+                    const newProduct = new Product(title, description, price, category, code, stock, status, thumbnails)
+                    newProduct.id = await this.addId()
+                    data.push(newProduct)
+                    console.log(`ADDED: "${title}" was added successfully.`)
+                    await fs.writeFile(this.path, JSON.stringify(data, null, '\t'))
+                    return 'Producto agregado'
+                }
             }
         }
-    }
     async updateProduct(id, {title, description, price, category, code, stock, status, thumbnails}){
         console.log('--------------------------')
         console.log('UPDATING ...')
